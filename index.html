@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Docs Style Explorer – Bulk style scan & edit for Google Docs</title>
-  <meta name="description" content="Scan Google Docs styles and apply bulk formatting. Save time, fix inconsistencies, and keep documents professional." />
+  <title>Bulk Text Editor – Bulk style scan & edit for Google Docs</title>
+  <meta name="description" content="Bulk Text Editor scans Google Docs styles and applies bulk formatting. Save time, fix inconsistencies, and keep documents professional." />
   <style>
     :root{
       --bg:#0b0f14; --card:#10161f; --soft:#0f141b; --muted:#a8b3c7; --txt:#e6eefc; --accent:#6aa6ff; --accent-2:#7ff0d7;
@@ -17,7 +17,6 @@
     a:hover { text-decoration: underline; }
     .container { max-width: 1080px; margin: 0 auto; padding: 24px; }
 
-    /* Header */
     .nav { display:flex; align-items:center; justify-content:space-between; gap:16px; padding: 8px 0; }
     .brand { display:flex; align-items:center; gap:12px; }
     .logo { width:36px; height:36px; border-radius:10px; background: radial-gradient(80% 80% at 20% 20%, var(--accent), #3c78ff 50%, #203a72 100%); box-shadow: 0 8px 24px rgba(106,166,255,.25); }
@@ -25,7 +24,6 @@
     .nav a.btn { padding:10px 14px; border-radius:12px; background:linear-gradient(135deg,var(--accent),#3c78ff); color:#0b0f14; font-weight:600; box-shadow: 0 8px 30px rgba(106,166,255,.35); }
     .nav a.btn:hover { filter:brightness(1.05); }
 
-    /* Hero */
     .hero { padding: 64px 0 32px; display:grid; grid-template-columns: 1.2fr .8fr; gap:28px; align-items:center; }
     .hero h2 { font-size: clamp(28px, 4vw, 48px); line-height:1.1; margin:0 0 14px; }
     .hero p.lead { color: var(--muted); font-size: clamp(15px, 2vw, 18px); margin: 0 0 22px; }
@@ -33,47 +31,33 @@
     .cta a { display:inline-block; padding:12px 16px; border-radius:14px; font-weight:600; }
     .cta .primary { background:linear-gradient(135deg,var(--accent),#3c78ff); color:#0b0f14; box-shadow:0 12px 30px rgba(106,166,255,.35); }
     .cta .ghost { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); color:var(--txt); }
-    .mock { background: linear-gradient(135deg, #121a24, #0f141b); border:1px solid #1b2636; border-radius: var(--radius); min-height: 280px; padding:18px; position: relative; overflow:hidden; box-shadow: 0 30px 80px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.02); }
-    .mock:before { content:""; position:absolute; inset:-40% -20% auto auto; height:220px; width:220px; background:radial-gradient(closest-side, rgba(127,240,215,.35), transparent 70%); filter: blur(12px); transform: rotate(12deg); }
-    .mock .bar { display:flex; gap:8px; }
-    .dot { width:10px; height:10px; border-radius:50%; background:#2c3a52; }
-    .panel { margin-top:14px; display:grid; grid-template-columns: 1.1fr .9fr; gap:14px; }
-    .card { background: #0e141c; border:1px solid #1b2636; border-radius: 14px; padding:14px; }
-    .tag { display:inline-block; margin: 6px 6px 0 0; padding:6px 10px; border-radius:10px; background:#0a1119; border:1px solid #1b2636; color:#b7c3d9; font-size:12px; }
 
-    /* Section shells */
+    .mock { background: linear-gradient(135deg, #121a24, #0f141b); border:1px solid #1b2636; border-radius: var(--radius); min-height: 280px; padding:18px; position: relative; overflow:hidden; box-shadow: 0 30px 80px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.02); }
+    .mock .tag { display:inline-block; margin: 6px 6px 0 0; padding:6px 10px; border-radius:10px; background:#0a1119; border:1px solid #1b2636; color:#b7c3d9; font-size:12px; }
+
     section { padding: 40px 0; }
     .section-title { font-size: 22px; margin: 0 0 14px; }
     .muted { color: var(--muted); }
 
-    /* Features grid */
     .grid { display:grid; gap:16px; grid-template-columns: repeat(3, 1fr); }
-    .feature { background: var(--card); border:1px solid #1b2636; border-radius: var(--radius); padding:18px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.02); }
+    .feature { background: var(--card); border:1px solid #1b2636; border-radius: var(--radius); padding:18px; }
     .feature h3 { margin:0 0 8px; font-size:18px; }
     .feature p { margin:0; color:var(--muted); font-size:14px; }
 
-    /* Steps */
     .steps { display:grid; gap:14px; grid-template-columns: repeat(4,1fr); }
     .step { background: linear-gradient(180deg, #0e151e, #0b1119); border:1px solid #1b2636; border-radius: 14px; padding:16px; }
     .step b { display:block; margin-bottom:6px; }
     .kicker { display:inline-block; font-size:12px; letter-spacing:.2em; color:#9db3ff; background:rgba(106,166,255,.12); border:1px solid rgba(106,166,255,.25); padding:6px 10px; border-radius:999px; margin-bottom:10px; }
 
-    /* Callouts */
     .callout { background: linear-gradient(180deg, #0b121a, #0a121a); border:1px solid #1b2636; border-radius: var(--radius); padding: 18px; display:flex; gap:16px; align-items:center; }
-    .callout .badge { width:36px; height:36px; border-radius:10px; background: radial-gradient(80% 80% at 20% 20%, var(--accent-2), #1fd9b9 50%, #157a6c 100%); box-shadow: 0 8px 24px rgba(127,240,215,.25); }
+    .callout .badge { width:36px; height:36px; border-radius:10px; background: radial-gradient(80% 80% at 20% 20%, var(--accent-2), #1fd9b9 50%, #157a6c 100%); }
 
-    /* Footer */
     footer { padding: 40px 0 20px; color: var(--muted); font-size:14px; }
     .foot-grid { display:grid; grid-template-columns: 2fr 1fr 1fr; gap:18px; }
     .tiny { font-size:12px; color:#8ca0bb; }
 
-    /* Buttons focus */
-    .cta a:focus, .nav a.btn:focus { outline:none; box-shadow: var(--ring); }
-
-    /* Responsive */
     @media (max-width: 980px){
       .hero { grid-template-columns: 1fr; }
-      .panel { grid-template-columns: 1fr; }
       .grid { grid-template-columns: 1fr 1fr; }
       .steps { grid-template-columns: 1fr 1fr; }
       .foot-grid { grid-template-columns: 1fr 1fr; }
@@ -86,125 +70,70 @@
   </style>
 </head>
 <body>
-  <header class="container nav" aria-label="Primary">
+  <header class="container nav">
     <div class="brand">
-      <div class="logo" aria-hidden="true"></div>
-      <h1>Docs Style Explorer</h1>
+      <div class="logo"></div>
+      <h1>Bulk Text Editor</h1>
     </div>
     <nav>
-      <a class="btn" href="https://chromewebstore.google.com/detail/bahjibiopfhibkblhejakhiaaocfobdi" target="_blank" rel="noopener">Install</a>
+      <a class="btn" href="https://chrome.google.com/webstore/detail/bulk-text-editor/bahjibiopfhibkblhejakhiaaocfobdi" target="_blank">Install</a>
     </nav>
   </header>
 
   <main>
-    <!-- Hero -->
     <section class="container hero">
       <div>
         <span class="kicker">GOOGLE DOCS · BULK FORMATTING</span>
-        <h2>Scan styles. Select types. <br />Apply formatting in bulk.</h2>
-        <p class="lead">Fix formatting fast and keep documents consistent. Detect headings, lists, fonts, colors, and character styles—then update them all at once.</p>
+        <h2>Scan styles. Select types.<br>Apply formatting in bulk.</h2>
+        <p class="lead">Bulk Text Editor saves hours of manual formatting. Detect headings, lists, fonts, and styles, then apply changes everywhere at once.</p>
         <div class="cta">
-          <a class="primary" href="https://chromewebstore.google.com/detail/bahjibiopfhibkblhejakhiaaocfobdi" target="_blank" rel="noopener">Add to Chrome</a>
+          <a class="primary" href="https://chrome.google.com/webstore/detail/bulk-text-editor/bahjibiopfhibkblhejakhiaaocfobdi" target="_blank">Add to Chrome</a>
         </div>
-        <p class="tiny" style="margin-top:10px;">Works only inside Google Docs you open. No data collected.</p>
       </div>
-
-      <!-- Visual mock (no images, CSS only) -->
-      <aside class="mock" aria-hidden="true">
-        <div class="bar">
-          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        </div>
-        <div class="panel">
-          <div class="card">
-            <div class="tag">Paragraph style: HEADING_1</div>
-            <div class="tag">List level: 2</div>
-            <div class="tag">Char: bold | size=12 | font=Roboto</div>
-            <div class="tag">Char: color=#222</div>
-          </div>
-          <div class="card">
-            <div class="tag">Apply → Text color: #0047FF</div>
-            <div class="tag">Apply → Highlight: #FFFF00</div>
-            <div class="tag">Apply → Font: Inter</div>
-            <div class="tag">✔ Updated 57 ranges</div>
-          </div>
-        </div>
+      <aside class="mock">
+        <div class="tag">Heading 1 (12)</div>
+        <div class="tag">Bold text (34)</div>
+        <div class="tag">List level 2 (15)</div>
+        <div class="tag">Apply → Text color: Blue</div>
+        <div class="tag">✔ Updated 61 ranges</div>
       </aside>
     </section>
 
-    <!-- Features -->
     <section class="container">
-      <h2 class="section-title">Why you’ll love it</h2>
-      <p class="muted">Purpose-built for speed, consistency, and professional results in Google Docs.</p>
-      <div class="grid" role="list">
-        <article class="feature" role="listitem">
+      <h2 class="section-title">Why choose Bulk Text Editor?</h2>
+      <div class="grid">
+        <article class="feature">
           <h3>Document Scanner</h3>
-          <p>Detect headings, lists, fonts, colors, and character styles across the entire document.</p>
+          <p>Instantly detect all paragraph, list, and character styles in your doc.</p>
         </article>
-        <article class="feature" role="listitem">
-          <h3>Style Catalog</h3>
-          <p>See every style with counts at a glance. Spot inconsistencies instantly.</p>
-        </article>
-        <article class="feature" role="listitem">
+        <article class="feature">
           <h3>Bulk Actions</h3>
-          <p>Change font, size, color, or highlight for selected style groups in one go.</p>
+          <p>Change font, size, or color across multiple style groups in one go.</p>
         </article>
-        <article class="feature" role="listitem">
-          <h3>Consistency Tools</h3>
-          <p>Keep brand or academic standards across the whole document—without manual edits.</p>
-        </article>
-        <article class="feature" role="listitem">
-          <h3>Privacy-First</h3>
-          <p>No data collection. Operates only on docs you open and authorize.</p>
-        </article>
-        <article class="feature" role="listitem">
-          <h3>Quick Undo</h3>
-          <p>All changes respect Google Docs’ native Undo so you can experiment safely.</p>
+        <article class="feature">
+          <h3>Consistency</h3>
+          <p>Ensure professional, uniform formatting throughout your document.</p>
         </article>
       </div>
     </section>
 
-    <!-- Steps -->
     <section class="container">
       <h2 class="section-title">How it works</h2>
-      <div class="steps" role="list">
-        <div class="step" role="listitem">
-          <b>1) Scan your doc</b>
-          <span class="muted">Click the extension to analyze styles used across the file.</span>
-        </div>
-        <div class="step" role="listitem">
-          <b>2) Review styles</b>
-          <span class="muted">See a clean list of paragraph, list, and character styles with counts.</span>
-        </div>
-        <div class="step" role="listitem">
-          <b>3) Select types</b>
-          <span class="muted">Choose one or more style groups to update.</span>
-        </div>
-        <div class="step" role="listitem">
-          <b>4) Apply in bulk</b>
-          <span class="muted">Change font, size, color, or highlight across all selected ranges.</span>
-        </div>
+      <div class="steps">
+        <div class="step"><b>1. Scan</b><span class="muted">Analyze your doc’s styles</span></div>
+        <div class="step"><b>2. Review</b><span class="muted">See all headings, lists, and fonts</span></div>
+        <div class="step"><b>3. Select</b><span class="muted">Choose the styles you want to edit</span></div>
+        <div class="step"><b>4. Apply</b><span class="muted">Format them all at once</span></div>
       </div>
     </section>
 
-    <!-- Callouts -->
     <section class="container">
       <div class="callout">
-        <div class="badge" aria-hidden="true"></div>
+        <div class="badge"></div>
         <div>
-          <b>Permissions explained</b>
-          <p class="muted" style="margin:6px 0 0;">Requires Google Docs access to read styles and apply your chosen changes. Nothing is stored or sent anywhere else.</p>
+          <b>Privacy-first</b>
+          <p class="muted">Bulk Text Editor never stores your data. All changes happen in your browser with your permission.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- Secondary CTA -->
-    <section class="container">
-      <div class="callout" style="justify-content:space-between;">
-        <div>
-          <b>Ready to fix formatting fast?</b>
-          <p class="muted" style="margin:6px 0 0;">Install the extension and bring instant consistency to your Docs.</p>
-        </div>
-        <a class="btn" href="https://chromewebstore.google.com/detail/bahjibiopfhibkblhejakhiaaocfobdi" target="_blank" rel="noopener" style="padding:12px 16px; border-radius:12px; background:linear-gradient(135deg,var(--accent),#3c78ff); color:#0b0f14; font-weight:700;">Add to Chrome</a>
       </div>
     </section>
   </main>
@@ -212,24 +141,25 @@
   <footer class="container">
     <div class="foot-grid">
       <div>
-        <b>Docs Style Explorer</b>
+        <b>Bulk Text Editor</b>
         <p class="muted">Bulk style scan & formatting for Google Docs. Built for speed, consistency, and privacy.</p>
       </div>
       <div>
         <b>Resources</b>
         <p class="tiny">
-          <a href="privacy.html">Privacy</a><br />
+          <a href="privacy.html">Privacy</a><br>
           <a href="support.html">Support</a>
         </p>
       </div>
       <div>
         <b>Contact</b>
         <p class="tiny">
-          Issues: <a href="https://github.com/ebtihaj-khan/gdocs-style-manager-site/issues" target="_blank" rel="noopener">GitHub Issues</a>
+          Email: <a href="mailto:support@example.com">support@example.com</a><br>
+          Issues: <a href="https://github.com/ebtihaj-khan/gdocs-style-manager-site/issues" target="_blank">GitHub Issues</a>
         </p>
       </div>
     </div>
-    <p class="tiny">© <span id="y">2025</span> Docs Style Explorer. All rights reserved.</p>
+    <p class="tiny">© <span id="y">2025</span> Bulk Text Editor. All rights reserved.</p>
   </footer>
 </body>
 </html>
